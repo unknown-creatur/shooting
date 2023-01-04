@@ -15,12 +15,15 @@ input.onGesture(Gesture.Shake, function () {
     bullet2 = game.createSprite(_3p.get(LedSpriteProperty.X), _3p.get(LedSpriteProperty.Y))
     bullet3 = game.createSprite(_4p.get(LedSpriteProperty.X), _4p.get(LedSpriteProperty.Y))
     bullet4 = game.createSprite(_5p.get(LedSpriteProperty.X), _5p.get(LedSpriteProperty.Y))
-    for (let index = 0; index < 4; index++) {
-        bullet.change(LedSpriteProperty.Y, -1)
-        bullet1.change(LedSpriteProperty.Y, -1)
-        bullet2.change(LedSpriteProperty.Y, -1)
-        bullet3.change(LedSpriteProperty.Y, -1)
-        bullet4.change(LedSpriteProperty.Y, -1)
+    for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < 4; index++) {
+            bullet.change(LedSpriteProperty.Y, -1)
+            bullet1.change(LedSpriteProperty.Y, -1)
+            bullet2.change(LedSpriteProperty.Y, -1)
+            bullet3.change(LedSpriteProperty.Y, -1)
+            bullet4.change(LedSpriteProperty.Y, -1)
+            basic.pause(100)
+        }
     }
     bullet.delete()
     bullet1.delete()
@@ -68,12 +71,8 @@ let airplane = game.createSprite(0, 0)
 _1p = game.createSprite(1, 4)
 _2p = game.createSprite(3, 4)
 basic.forever(function () {
-    basic.pause(randint(1, 300))
-    airplane.change(LedSpriteProperty.X, 1)
-    if (airplane.get(LedSpriteProperty.X) == 4) {
-        basic.pause(randint(1, 300))
-        airplane.change(LedSpriteProperty.Y, 1)
-        airplane.set(LedSpriteProperty.X, 0)
+    if (airplane.isTouching(_1p)) {
+        game.gameOver()
     }
 })
 basic.forever(function () {
@@ -114,7 +113,11 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (airplane.isTouching(_1p)) {
-        game.gameOver()
+    basic.pause(randint(1, 300))
+    airplane.change(LedSpriteProperty.X, 1)
+    if (airplane.get(LedSpriteProperty.X) == 4) {
+        basic.pause(randint(1, 300))
+        airplane.change(LedSpriteProperty.Y, 1)
+        airplane.set(LedSpriteProperty.X, 0)
     }
 })
