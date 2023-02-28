@@ -97,6 +97,22 @@ basic.forever(function () {
         airplane.set(LedSpriteProperty.X, 0)
     }
 })
+// 導彈(1)
+basic.forever(function () {
+    if (game.isGameOver()) {
+    	
+    } else {
+        basic.pause(randint(5000, 10000))
+        missile1 = game.createSprite(randint(0, 4), 4)
+        if (missile1.isTouching(airplane)) {
+            missile1.delete()
+        } else {
+            missile1.change(LedSpriteProperty.Y, randint(-1, -4))
+            missile1.change(LedSpriteProperty.X, randint(-4, 4))
+            missile1.ifOnEdgeBounce()
+        }
+    }
+})
 // 分數計算
 basic.forever(function () {
     if (game.isGameOver()) {
